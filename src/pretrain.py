@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 
 import utils as utl
-
 def decision_gini(df: pd.DataFrame, target: str, child: str = None) -> float:
     target_count = df.groupby(target)[target].count()
     pi = target_count / len(df)
