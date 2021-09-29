@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+import utils as utl
 def decision_gini(df: pd.DataFrame, target: str, child: str = None) -> float:
     target_count = df.groupby(target)[target].count()
     pi = target_count / len(df)
@@ -43,3 +44,10 @@ def decision_info_gain(df: pd.DataFrame, target: str, child: str, score_type: st
     if score_type == 'gini':
         gain = decision_gini(df, target)
     return gain
+
+def test_decision_overfit(df: pd.DataFrame, target: str, n_depths = None):
+    score_list = []
+    for i in range(1, n_depths):
+        train_score, test_score = utl.decision_tree(df, target, encoding = True, max_depth=i, score = "return")
+        score_list.append([train_score, test_score])
+    return score_list
