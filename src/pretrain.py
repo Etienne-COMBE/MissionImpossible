@@ -43,15 +43,3 @@ def decision_info_gain(df: pd.DataFrame, target: str, child: str, score_type: st
     if score_type == 'gini':
         gain = decision_gini(df, target)
     return gain
-
-def test_gini(df: pd.DataFrame):
-    sample = pd.DataFrame({"target": [1,1,1,1,0,0,0,0]})
-    gini = decision_gini(sample, "target")
-
-    assert gini == 0.5
-    
-def test_entropy(df: pd.DataFrame):
-    sample = pd.DataFrame({"target": [1,1,1,1,0,0,0,0]})
-    entropy = decision_entropy(sample, "target")
-
-    assert entropy == 1
