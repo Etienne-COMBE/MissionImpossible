@@ -81,3 +81,11 @@ def survie(model, pclass=3, sex=0, age=28):
     x = np.array([pclass, sex, age]).reshape(1, 3) 
     print(model.predict(x))
     print(model.predict_proba(x))
+
+def valeursAberrantes(df_titanic:pd.DataFrame, variable_name:str):
+    # Calcul des IQR
+    iqr = df_titanic[variable_name].quantile(0.75) -  df_titanic[variable_name].quantile(0.25)
+    borne_inferieur = df_titanic[variable_name].quantile(0.25) - 1.5*iqr
+    borne_superieur = df_titanic[variable_name].quantile(0.75) + 1.5*iqr
+    # Ecrire une condition : Retoure une dataframe en indiquand les observations ou j'ai nom_variable contion les outliers
+    return df_titanic[(df_titanic[variable_name] < borne_inferieur) | (df_titanic[variable_name]> borne_superieur)]
